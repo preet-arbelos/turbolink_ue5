@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package audio2face;
+
+message PushAudioRequest {
+    bytes audio_data = 1;
+    int32 samplerate = 2;
+    string instance_name = 3;
+    bool block_until_playback_is_finished = 4;
+}
+
+message PushAudioStreamRequest {
+    oneof audio_chunk {
+        PushAudioRequestStart start_marker = 1;
+        bytes audio_data = 2;
+    }
+}
+
+message PushAudioRequestStart {
+    int32 samplerate = 1;
+    string instance_name = 2;
+    bool block_until_playback_is_finished = 3;
+}
+
+service Audio2Face {
+    rpc PushAudio(PushAudioRequest) returns (PushAudioResponse) {}
+    rpc PushAudioStream(stream PushAudioStreamRequest) returns (PushAudioResponse) {}
+}
+
+message PushAudioResponse {
+    bool success = 1;
+    string message = 2;
+}
