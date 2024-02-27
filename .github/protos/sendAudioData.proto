@@ -3,26 +3,24 @@ syntax = "proto3";
 package audio2face;
 
 message PushAudioRequest {
-    bytes audio_data = 1;
-    int32 samplerate = 2;
-    string instance_name = 3;
-    bool block_until_playback_is_finished = 4;
-    string url = 5;
+    string url = 1;
+    bytes audio_data = 2;
+    int32 samplerate = 3;
+    string instance_name = 4;
 }
 
 message PushAudioStreamRequest {
+    string url = 1;
     oneof audio_chunk {
-        PushAudioRequestStart start_marker = 1;
-        bytes audio_data = 2;
+        PushAudioRequestStart start_marker = 2;
+        bytes audio_data = 3;
     }
-    string url = 3;
 }
 
 message PushAudioRequestStart {
-    int32 samplerate = 1;
-    string instance_name = 2;
-    bool block_until_playback_is_finished = 3;
-    string url = 4;
+    string url = 1;
+    int32 samplerate = 2;
+    string instance_name = 3;
 }
 
 service Audio2Face {
