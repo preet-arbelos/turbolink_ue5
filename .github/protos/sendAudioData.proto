@@ -7,6 +7,7 @@ message PushAudioRequest {
     int32 samplerate = 2;
     string instance_name = 3;
     bool block_until_playback_is_finished = 4;
+    string url = 5;
 }
 
 message PushAudioStreamRequest {
@@ -14,12 +15,14 @@ message PushAudioStreamRequest {
         PushAudioRequestStart start_marker = 1;
         bytes audio_data = 2;
     }
+    string url = 3;
 }
 
 message PushAudioRequestStart {
     int32 samplerate = 1;
     string instance_name = 2;
     bool block_until_playback_is_finished = 3;
+    string url = 4;
 }
 
 service Audio2Face {
